@@ -1,8 +1,8 @@
 package com.marius.vila;
 
+import com.marius.vila.amenity.model.AType;
 import com.marius.vila.amenity.model.Amenity;
 import com.marius.vila.amenity.model.AmenityType;
-import com.marius.vila.amenity.model.AType;
 import com.marius.vila.amenity.repository.AmenityRepository;
 import com.marius.vila.amenity.repository.AmenityTypeRepository;
 import com.marius.vila.room.model.RType;
@@ -32,7 +32,7 @@ public class PopulateDB {
         AmenityType at1 = new AmenityType();
         at1.setName(AType.VILA_AMENITY);
         AmenityType at2 = new AmenityType();
-        at1.setName(AType.ROOM_AMENITY);
+        at2.setName(AType.ROOM_AMENITY);
         List<AmenityType> amenityTypes = Arrays.asList(at1, at2);
         for(AmenityType x : amenityTypes) {
             amenityTypeRepository.save(x);
@@ -76,7 +76,7 @@ public class PopulateDB {
             if(x.equals("Room 5") || x.equals("Room 6")) {
                 room.setRoomType(rt2);
             } else {
-                room.setRoomType(rt2);
+                room.setRoomType(rt1);
             }
             room.setPrice(250.00f);
             room.setAmenities(amenityRepository.findAllByAmenityType(at2));

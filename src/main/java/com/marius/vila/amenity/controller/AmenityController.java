@@ -26,7 +26,7 @@ public class AmenityController {
     }
 
     @Transactional
-    @GetMapping("/villa")
+    @GetMapping("/vila")
     public List<Amenity> getAllVilaAmenities() {
         return amenityService.getAllVilaAmenities();
     }
