@@ -1,5 +1,5 @@
 package com.marius.vila.amenity.model;
 
-public enum Type {
+public enum AType {
     VILA_AMENITY, ROOM_AMENITY
 }

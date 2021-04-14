@@ -22,6 +22,6 @@ public class RoomType {
     private Long id;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private Type name;
+    @Enumerated
+    private RType type;
 }
