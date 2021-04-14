@@ -2,12 +2,13 @@ package com.marius.vila.amenity.service;
 
 import com.marius.vila.amenity.model.AType;
 import com.marius.vila.amenity.model.Amenity;
+import com.marius.vila.amenity.model.AmenityType;
 import com.marius.vila.amenity.repository.AmenityRepository;
+import com.marius.vila.amenity.repository.AmenityTypeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +16,7 @@ import java.util.List;
 public class AmenityService {
 
     private final AmenityRepository amenityRepository;
+    private final AmenityTypeRepository amenityTypeRepository;
 
     @Transactional
     public List<Amenity> getAllAmenities() {
@@ -23,14 +25,8 @@ public class AmenityService {
 
     @Transactional
     public List<Amenity> getAllVilaAmenities() {
-        List<Amenity> all = getAllAmenities();
-        List<Amenity> villa = new ArrayList<>();
-        for(Amenity x : all) {
-            if(x.getAmenityType().getName().equals(AType.VILA_AMENITY)) {
-                villa.add(x);
-            }
-        }
-        return villa;
+        AmenityType type = amenityTypeRepository.getAmenityTypeByName(AType.VILA_AMENITY);
+        return amenityRepository.findAllByAmenityType(type);
     }
 
     public Amenity getAmenityById(Long id) {
