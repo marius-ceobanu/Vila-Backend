@@ -19,5 +19,5 @@ public class AmenityType {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private Type name;
+    private AType name;
 }

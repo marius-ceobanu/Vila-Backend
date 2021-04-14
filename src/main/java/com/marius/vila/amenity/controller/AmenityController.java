@@ -24,4 +24,10 @@ public class AmenityController {
     public List<Amenity> getAllAmenities() {
         return amenityService.getAllAmenities();
     }
+
+    @Transactional
+    @GetMapping("/villa")
+    public List<Amenity> getAllVilaAmenities() {
+        return amenityService.getAllVilaAmenities();
+    }
 }
