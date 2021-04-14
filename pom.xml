@@ -12,7 +12,7 @@
     <artifactId>vila</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>vila</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Vila booking website</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -46,6 +46,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>2.0.2</version>
         </dependency>
     </dependencies>
 
