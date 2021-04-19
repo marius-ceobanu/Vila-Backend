@@ -31,4 +31,9 @@ public class RoomService {
         RoomType type = roomTypeRepository.getOne(Long.parseLong(roomTypeId));
         return roomRepository.findAllByRoomType(type);
     }
+
+    @Transactional
+    public Room getRoomById(String roomId) {
+        return roomRepository.getOne(Long.parseLong(roomId));
+    }
 }

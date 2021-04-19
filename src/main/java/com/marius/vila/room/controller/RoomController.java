@@ -33,4 +33,10 @@ public class RoomController {
     public List<Room> getAllRoomsByType(@PathVariable("roomTypeId") String roomTypeId) {
         return roomService.getAllRoomsByType(roomTypeId);
     }
+
+    @Transactional
+    @GetMapping("/{roomId}")
+    public Room getRoomById(@PathVariable("roomId") String roomId) {
+        return roomService.getRoomById(roomId);
+    }
 }
