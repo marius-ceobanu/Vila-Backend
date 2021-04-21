@@ -74,8 +74,8 @@ public class AuthenticationService {
             res.addCookie(cookie);
 
             return ResponseEntity.ok(model);
-        } catch (UsernameNotFoundException e) {
-            throw new BadCredentialsException("Invalid username/password supplied");
+        } catch (UsernameNotFoundException | BadCredentialsException e) {
+            return new ResponseEntity<>("Invalid username/password supplied!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
