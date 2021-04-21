@@ -3,14 +3,15 @@ package com.marius.vila.room.controller;
 import com.marius.vila.room.model.Room;
 import com.marius.vila.room.model.RoomType;
 import com.marius.vila.room.service.RoomService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("vila/v1/rooms")
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class RoomController {
