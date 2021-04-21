@@ -5,12 +5,18 @@ import com.marius.vila.amenity.model.Amenity;
 import com.marius.vila.amenity.model.AmenityType;
 import com.marius.vila.amenity.repository.AmenityRepository;
 import com.marius.vila.amenity.repository.AmenityTypeRepository;
+import com.marius.vila.authentication.model.DbUser;
+import com.marius.vila.authentication.model.UType;
+import com.marius.vila.authentication.model.UserType;
+import com.marius.vila.authentication.repository.UserRepository;
+import com.marius.vila.authentication.repository.UserTypeRepository;
 import com.marius.vila.room.model.RType;
 import com.marius.vila.room.model.Room;
 import com.marius.vila.room.model.RoomType;
 import com.marius.vila.room.repository.RoomRepository;
 import com.marius.vila.room.repository.RoomTypeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -25,6 +31,9 @@ public class PopulateDB {
     private final AmenityTypeRepository amenityTypeRepository;
     private final RoomTypeRepository roomTypeRepository;
     private final RoomRepository roomRepository;
+    private final UserRepository userRepository;
+    private final UserTypeRepository userTypeRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void populateDb() {
 
@@ -82,5 +91,34 @@ public class PopulateDB {
             room.setAmenities(amenityRepository.findAllByAmenityType(at2));
             roomRepository.save(room);
         }
+
+        // Default users
+        // Default user types
+        UserType adminT = new UserType();
+        adminT.setName(UType.ROLE_ADMIN);
+        adminT.setDescription("Verifies reservation, administrates rooms media and facility");
+
+        UserType userT = new UserType();
+        userT.setName(UType.ROLE_USER);
+        userT.setDescription("Manges own bookings");
+
+        UserType guestT = new UserType();
+        guestT.setName(UType.ROLE_GUEST);
+        guestT.setDescription("Makes booking based on form only and has access to facility presentation");
+
+        List<UserType> userTypes = Arrays.asList(adminT, userT, guestT);
+        for(UserType x : userTypes) {
+            userTypeRepository.save(x);
+        }
+
+        DbUser admin = new DbUser();
+        admin.setUserType(adminT);
+        admin.setFirstName("Marius");
+        admin.setLastName("Ceobanu");
+        admin.setEmail("ceobanu.marius@gmail.com");
+        admin.setPhoneNumber("0761648030");
+        admin.setPassword(passwordEncoder.encode("satcalarasi"));
+        admin.setVerified(true);
+        userRepository.save(admin);
     }
 }
