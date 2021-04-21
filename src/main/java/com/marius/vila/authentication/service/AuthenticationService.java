@@ -46,8 +46,7 @@ public class AuthenticationService {
     }
 
     public ResponseEntity<String> register(RegisterDto req) {
-        // TODO set validation to new validation logic when implemented
-        ResponseEntity<String> validation = new ResponseEntity<>("Registration successful", HttpStatus.OK);
+        ResponseEntity<String> validation = validateRegistration(req);
         if (validation.getStatusCode().equals(HttpStatus.OK)) {
             DbUser newAppUser = createUserFromRequest(req);
 
@@ -78,6 +77,13 @@ public class AuthenticationService {
         } catch (UsernameNotFoundException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
+    }
+
+    private ResponseEntity<String> validateRegistration(RegisterDto req) {
+        Optional<DbUser> userOptional = getUserByEmail(req.getEmail());
+
+        return userOptional.isPresent() ? new ResponseEntity<>("Email already exists!", HttpStatus.INTERNAL_SERVER_ERROR)
+                : new ResponseEntity<>("Registration successful", HttpStatus.OK);
     }
 
     private DbUser createUserFromRequest(RegisterDto req) {
