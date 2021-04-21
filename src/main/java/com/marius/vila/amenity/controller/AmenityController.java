@@ -2,7 +2,8 @@ package com.marius.vila.amenity.controller;
 
 import com.marius.vila.amenity.model.Amenity;
 import com.marius.vila.amenity.service.AmenityService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/vila/v1/amenities")
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class AmenityController {

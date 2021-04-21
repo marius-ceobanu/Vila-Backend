@@ -5,14 +5,15 @@ import com.marius.vila.amenity.model.Amenity;
 import com.marius.vila.amenity.model.AmenityType;
 import com.marius.vila.amenity.repository.AmenityRepository;
 import com.marius.vila.amenity.repository.AmenityTypeRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AmenityService {
 
     private final AmenityRepository amenityRepository;

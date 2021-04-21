@@ -4,14 +4,15 @@ import com.marius.vila.room.model.Room;
 import com.marius.vila.room.model.RoomType;
 import com.marius.vila.room.repository.RoomRepository;
 import com.marius.vila.room.repository.RoomTypeRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomTypeRepository roomTypeRepository;
