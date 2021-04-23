@@ -37,10 +37,6 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
-    public Optional<DbUser> getUserByEmail (String email) {
-        return userRepository.getByEmail(email);
-    }
-
     public DbUser getUserById(Long id) {
         return userRepository.getOne(id);
     }
@@ -61,6 +57,7 @@ public class AuthenticationService {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, req.getPassword()));
 
             List<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+            Optional<DbUser> user = userRepository.getByEmail(email);
 
             String token = jwtTokenService.createToken(email, roles);
 
@@ -68,6 +65,11 @@ public class AuthenticationService {
             model.put("email", email);
             model.put("roles", roles);
             model.put("token", token);
+            if(user.isPresent()) {
+                model.put("id", user.get().getId());
+                model.put("firstName", user.get().getFirstName());
+                model.put("userTypeName", user.get().getUserType().getName());
+            }
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(606024);
             cookie.setHttpOnly(true);
@@ -80,7 +82,7 @@ public class AuthenticationService {
     }
 
     private ResponseEntity<String> validateRegistration(RegisterDto req) {
-        Optional<DbUser> userOptional = getUserByEmail(req.getEmail());
+        Optional<DbUser> userOptional = userRepository.getByEmail(req.getEmail());
 
         return userOptional.isPresent() ? new ResponseEntity<>("Email already exists!", HttpStatus.INTERNAL_SERVER_ERROR)
                 : new ResponseEntity<>("Registration successful", HttpStatus.OK);

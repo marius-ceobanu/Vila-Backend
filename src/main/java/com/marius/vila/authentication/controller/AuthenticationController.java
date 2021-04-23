@@ -38,11 +38,6 @@ public class AuthenticationController {
         res.sendRedirect("/");
     }
 
-    @GetMapping("/get-user/{email}")
-    public Optional<DbUser> getUserByEmail(@PathVariable String email) {
-        return authenticationService.getUserByEmail(email);
-    }
-
     @GetMapping("/is-loged-in")
     public boolean isLoggedIn(HttpSession session) {
         return session.getAttribute("user") != null;
