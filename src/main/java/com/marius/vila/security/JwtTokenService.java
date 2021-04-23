@@ -59,7 +59,10 @@ public class JwtTokenService {
     public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-            return claims.getBody().getExpiration().before(new Date());
+            if (claims.getBody().getExpiration().before(new Date())) {
+                return false;
+            }
+            return true;
         } catch (JwtException | IllegalArgumentException e) {
             log.debug("JWT token invalid " + e);
         }
