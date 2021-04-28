@@ -2,7 +2,6 @@ package com.marius.vila.authentication.controller;
 
 import com.marius.vila.authentication.dto.LoginDto;
 import com.marius.vila.authentication.dto.RegisterDto;
-import com.marius.vila.authentication.model.DbUser;
 import com.marius.vila.authentication.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/vila/v1/authentication")
