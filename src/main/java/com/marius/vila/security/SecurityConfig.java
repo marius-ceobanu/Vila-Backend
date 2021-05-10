@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/vila/v1/authentication/is-logged-in").permitAll()
                 .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger-resources/configuration/ui","/swagger-ui.html").permitAll()
                 .antMatchers("/vila/v1/amenities/**").permitAll()
+                .antMatchers("/vila/v1/messages/**").permitAll()
                 .antMatchers("/vila/v1/rooms/**").permitAll()
 //                .antMatchers("/add-data").permitAll()
                 .anyRequest().denyAll()
