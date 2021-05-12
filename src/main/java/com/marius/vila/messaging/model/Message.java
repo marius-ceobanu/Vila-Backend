@@ -30,4 +30,8 @@ public class Message {
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String message;
+
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    private String answer;
 }
