@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,7 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/vila/v1/authentication/is-logged-in").permitAll()
                 .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger-resources/configuration/ui","/swagger-ui.html").permitAll()
                 .antMatchers("/vila/v1/amenities/**").permitAll()
-                .antMatchers("/vila/v1/messages/**").permitAll()
+                .antMatchers("/vila/v1/messages/add").permitAll()
+                .antMatchers("/vila/v1/messages/user/**").permitAll() //TODO set only for USER role
+                .antMatchers(HttpMethod.POST, "/vila/v1/messages/answer").hasRole("ADMIN")
+                .antMatchers("/vila/v1/messages/all").hasRole("ADMIN")
+                .antMatchers("/vila/v1/messages/").permitAll()
                 .antMatchers("/vila/v1/rooms/**").permitAll()
 //                .antMatchers("/add-data").permitAll()
                 .anyRequest().denyAll()

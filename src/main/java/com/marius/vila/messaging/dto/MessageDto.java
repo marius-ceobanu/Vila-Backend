@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class MessageDto {
-    private String name, email, message;
+    private String name, email, message, answer;
 }
