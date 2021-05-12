@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+AWSS3rootkey.csv
 
 ### IntelliJ IDEA ###
 .idea
